@@ -1,0 +1,99 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    list-style: none;
+    text-decoration: none;
+    font-family: "Sora", sans-serif;
+}
+
+.main-wrapper{
+    padding-top: 20vh;
+}
+
+.main-wrapper .container{
+    background: #FCFCFC;
+    border: 1px solid #CECECE;
+    border-radius: 10px;
+    width: 600px;
+    margin: auto;
+    padding: 60px 30px;
+}
+
+.screen .screen-1{
+    font-family: Roboto;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 28px;
+    text-align: right;
+    padding-bottom: 15px;    
+}
+
+.screen .screen-2{
+    font-family: Roboto;
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 38px;
+    text-align: right;
+    padding-bottom: 30px;
+}
+
+.main-wrapper button p{
+    font-family: Roboto;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 28px;
+    text-align: center;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.buttons button:hover{
+    cursor: pointer;
+}
+
+.buttons .button-row{
+    display: flex;
+    gap: 20px;
+}
+
+.buttons .button-row>button{
+    flex: 1;
+    padding: 16px 0;
+    border: none;
+    border-radius: 5px;
+    background: #EFEFEF;
+}
+
+.buttons .button-row>button:hover{
+    background: #dbd6d6;
+}
+
+.buttons .button-row-1>button,
+.buttons .button-row>button:last-child{
+    background: #FDD7C1;
+    color: #AC2A01;
+}
+
+.buttons .button-row-1>button:hover,
+.buttons .button-row>button:last-child:hover{
+    background: #f0b695;
+}
+
+.buttons .button-row #zero{
+    flex: 2.2;
+}
+
+.buttons .button-row #equals{
+    background: #F8935A;
+}
+
+.buttons .button-row #equals:hover{
+    background: #ce7948;
+}

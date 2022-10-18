@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <title>Calculator</title>
+</head>
+
+<body>
+    <div class="main-wrapper">
+        <div class="container">
+            <div class="screen">
+                <p class="screen-1">0</p>
+                <p class="screen-2">0</p>
+            </div>
+            <div class="buttons">
+                <div class="button-row button-row-1">
+                    <button id="clear" class="btn" onclick="btn_call(this.innerText)">
+                        <p>C</p>
+                    </button>
+                    <button id="del" class="btn" onclick="btn_call(this.innerText)">
+                        <p>Del</p>
+                    </button>
+                    <button id="reminder" class="btn" onclick="btn_call(this.innerText)">
+                        <p>%</p>
+                    </button>
+                    <button id="divide" class="btn" onclick="btn_call(this.innerText)">
+                        <p>/</p>
+                    </button>
+                </div>
+                <div class="button-row button-row-2">
+                    <button id="one" class="btn got" onclick="return btn_call(this.innerText)">
+                        <p>1</p>
+                    </button>
+                    <button id="two" class="btn" onclick="btn_call(this.innerText)">
+                        <p>2</p>
+                    </button>
+                    <button id="three" class="btn" onclick="btn_call(this.innerText)">
+                        <p>3</p>
+                    </button>
+                    <button id="multiply" class="btn" onclick="btn_call(this.innerText)">
+                        <p>x</p>
+                    </button>
+                </div>
+                <div class="button-row button-row-3">
+                    <button id="four" class="btn" onclick="btn_call(this.innerText)">
+                        <p>4</p>
+                    </button>
+                    <button id="five" class="btn" onclick="btn_call(this.innerText)">
+                        <p>5</p>
+                    </button>
+                    <button id="six" class="btn" onclick="btn_call(this.innerText)">
+                        <p>6</p>
+                    </button>
+                    <button id="plus" class="btn" onclick="btn_call(this.innerText)">
+                        <p>+</p>
+                    </button>
+                </div>
+                <div class="button-row button-row-4">
+                    <button id="seven" class="btn" onclick="btn_call(this.innerText)">
+                        <p>7</p>
+                    </button>
+                    <button id="eight" class="btn" onclick="btn_call(this.innerText)">
+                        <p>8</p>
+                    </button>
+                    <button id="nine" class="btn" onclick="btn_call(this.innerText)">
+                        <p>9</p>
+                    </button>
+                    <button id="minus" class="btn" onclick="btn_call(this.innerText)">
+                        <p>-</p>
+                    </button>
+                </div>
+                <div class="button-row button-row-5">
+                    <button id="zero" class="btn" onclick="btn_call(this.innerText)">
+                        <p>0</p>
+                    </button>
+                    <button id="decimal" class="btn" onclick="btn_call(this.innerText)">
+                        <p>.</p>
+                    </button>
+                    <button id="equals" class="btn" onclick="btn_call(this.innerText)">
+                        <p>=</p>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="./script.js"></script>
+</body>
+
+</html>
