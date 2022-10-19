@@ -1,99 +1,82 @@
 let screen_1 = document.querySelector(".screen-1");
 let screen_2 = document.querySelector(".screen-2");
-let value = '';
 let disp = '';
 let init = '';
 let num = '';
-let op ='';
-let x = 0;
-let y = 1;
+let last = 0;
+let t_flag = 0;
 const memory = [];
-const temp = [];
-let flag = 0;
-let op_flag = 0;
+let temp;
 let i = 0;
 let j = 0;
-let limit = 0;
+let k = 0;
 
 function btn_call(e) {
     disp += e;
     init += e;
     screen_1.innerHTML = disp;
-
-    if (e == "+" || e == "-" || e == "x" || e == "/" || e == "=") {
-        op = e;
-        for(j=0; j<memory[memory.length-1]; j++){
-            if(memory.length == 1){
-                op_flag = 1;
-                break;
-            }
-            else if(memory[j] == "/"){
-                num = memory[j-1] / memory[j+1];
-                memory.splice(j-1, 5 , num, "/");
-                i -=2;
-                console.log("/:", memory)
-            }
+    if(t_flag == 1){
+        for(k=0; k<=temp.length-1; k++){
+             memory[k] = temp[k]; 
         }
-        for(j=0; j<memory[memory.length-1]; j++){
-            if(memory.length == 1){
-                op_flag = 1;
-                break;
-            }
-            else if(memory[j] == "x"){
-                num = memory[j-1] * memory[j+1];
-                memory.splice(j-1, 5 , num, "x");
-                i -=2;
-                console.log("x:", memory)
-            }
-        }
-        for(j=0; j<memory[memory.length-1]; j++){
-            if(memory.length == 1){
-                op_flag = 1;
-                break;
-            }
-            else if(memory[j] == "-"){
-                num = memory[j-1] - memory[j+1];
-                memory.splice(j-1, 5 , num, "-");
-                i -=2;
-                console.log("-:", memory)
-            }
-        }
-        for(j=0; j<memory[memory.length-1]; j++){
-            if(memory.length == 1){
-                op_flag = 1;
-                break;
-            }
-            else if(memory[j] == "+"){
-                num = memory[j-1] + memory[j+1];
-                memory.splice(j-1, 5 , num, "+");
-                i -=2;
-                console.log("+:", memory)
-            }
-        }
-
+    }
+       
+    if (e == "+" || e == "-" || e == "x" || e == "/") {
         i++;
         memory[i] = e;
         i++;
         init = '';
+        last = memory.length-2;
     }
     else{
+        last = memory.length-1;
         memory[i]= parseFloat(init);
-        if(op_flag == 1){
-            x= parseFloat(init);
+    }
+    temp = [...memory];
+    t_flag = 1;
+
+    for(j=0; j<=last; j++){
+        if(memory.length == 1){
+            break;
         }
-        if(op == "/"){
-            screen_2.innerText = parseFloat(memory[0]) / x;
-        }
-        else if(op == "x"){
-            screen_2.innerText = parseFloat(memory[0]) * x;
-        }
-        else if(op == "-"){
-            screen_2.innerText = parseFloat(memory[0]) - x;
-        }
-        else if(op == "+"){
-            screen_2.innerText = parseFloat(memory[0]) + x;
+        else if(memory[j] == '/'){
+            num = parseFloat(memory[j-1]) / parseFloat(memory[j+1]);
+            memory.splice(j-1, 3 , num);
+            j=0;
         }
     }
-}
+    for(j=0; j<=last; j++){
+        if(memory.length == 1){
+            break;
+        }
+        else if(memory[j] == 'x'){
+            num = parseFloat(memory[j-1]) * parseFloat(memory[j+1]);
+            memory.splice(j-1, 3 , num);
+            j=0;
+        }
+    }
+    for(j=0; j<=last; j++){
+        if(memory.length == 1){
+            break;
+        }
+        else if(memory[j] == '-'){
+            num = parseFloat(memory[j-1]) - parseFloat(memory[j+1]);
+            memory.splice(j-1, 3 , num);
+            j=0;
+        }
+    }
+    for(j=0; j<=last; j++){
+        if(memory.length == 1){
+            break;
+        }
+        else if(memory[j] == '+'){
+            num = parseFloat(memory[j-1]) + parseFloat(memory[j+1]);
+            memory.splice(j-1, 3 , num);
+            j=0;
+        }
+        
+    }
+    screen_2.innerHTML = parseFloat(memory);
 
+}
 
