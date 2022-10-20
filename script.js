@@ -3,6 +3,7 @@ let screen_2 = document.querySelector(".screen-2");
 let disp = '';
 let t_disp = '';
 let init = '';
+let t_init = '';
 let num = '';
 let last = 0;
 let t_flag = 0;
@@ -19,6 +20,7 @@ function btn_call(e) {
     if(e != "Del"){
     disp += e;
     init += e;
+    console.log("init");
 }
 
     screen_1.innerHTML = disp;
@@ -66,10 +68,8 @@ function btn_call(e) {
             disp = t_disp;
             screen_1.innerHTML = disp;
             if(d_flag == 1){
-                console.log("last_math:", last_math);
                 memory.splice(memory.length-1, 1);
-                last = memory.length - 2;
-                console.log(last);
+                d_flag = 2;
             }
             else if(d_flag == 2){
                 x = parseInt(memory[memory.length-1]/10);
@@ -79,16 +79,13 @@ function btn_call(e) {
                 }
                 else{
                     memory[memory.length-1] = x;
-                    last = memory.length - 1;
+                    t_init = init.slice(0, -1);
+                    init = t_init;
+                    d_flag = 2;
                 }
-                // console.log("last_math:", last_math);
             }
-            if(isNaN(memory[memory.length-1])){
-                // console.log("M-2", memory[memory.length-2]);
-                // last = memory["lk", memory.length - 2];
-                console.log("ok");
+            
             }
-        }
         console.log(memory);
         temp = [...memory];
         t_flag = 1;
@@ -97,7 +94,7 @@ function btn_call(e) {
             if (memory.length == 1) {
                 break;
             }
-            else if (memory[j] == '/') {
+            else if (memory[j] == '/' && j != memory.length-1) {
                 num = parseFloat(memory[j - 1]) / parseFloat(memory[j + 1]);
                 memory.splice(j - 1, 3, num);
                 j = 0;
@@ -107,7 +104,7 @@ function btn_call(e) {
             if (memory.length == 1) {
                 break;
             }
-            else if (memory[j] == 'x') {
+            else if (memory[j] == 'x' && j != memory.length-1) {
                 num = parseFloat(memory[j - 1]) * parseFloat(memory[j + 1]);
                 memory.splice(j - 1, 3, num);
                 j = 0;
@@ -117,7 +114,7 @@ function btn_call(e) {
             if (memory.length == 1) {
                 break;
             }
-            else if (memory[j] == '-') {
+            else if (memory[j] == '-' && j != memory.length-1) {
                 num = parseFloat(memory[j - 1]) - parseFloat(memory[j + 1]);
                 memory.splice(j - 1, 3, num);
                 j = 0;
@@ -127,22 +124,14 @@ function btn_call(e) {
             if (memory.length == 1) {
                 break;
             }
-            else if (memory[j] == '+') {
+            else if (memory[j] == '+' && j != memory.length-1) {
                 num = parseFloat(memory[j - 1]) + parseFloat(memory[j + 1]);
                 memory.splice(j - 1, 3, num);
                 j = 0;
             }
 
         }
-            if(isNaN(memory[0] )){
-                screen_2.innerHTML = last_math;
-            }
-                else{
-                    last_math = memory[0];
-                    screen_2.innerHTML = parseFloat(memory[0]);
-                }
-                // screen_2.innerHTML = parseFloat(memory[0]);
-        // }
+                screen_2.innerHTML = parseFloat(memory[0]);
 
     }
 
