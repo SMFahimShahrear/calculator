@@ -51,7 +51,7 @@ function btn_call(e) {
             }
         }
 
-        if (e == "+" || e == "-" || e == "x" || e == "/" || e == "%") {
+        if (e == "+" || e == "-" || e == "x" || e == "/" ||  e == "%") {
             if(op_flag == 1){
                 i--;
                 memory[i] = e;
@@ -68,10 +68,6 @@ function btn_call(e) {
             init = '';
             last = memory.length - 1;
             d_flag = 1;
-            if(e != "%"){
-                op_flag = 1;
-                console.log("oks");
-            }
             dot_flag = 0;
             console.log(op_flag);
         }
@@ -93,11 +89,17 @@ function btn_call(e) {
             op_flag = 0;
         }
         if (e == "Del") {
+            console.log(init);
             if(disp[disp.length-2] == "."){
                 t_disp = disp.slice(0, -2);
+                t_init = init.slice(0, -2);
+                init = t_init;
+                dot_flag = 0;
             }
             else{
                 t_disp = disp.slice(0, -1);
+                t_init = init.slice(0, -1);
+                init = t_init;
             }
             disp = t_disp;
             screen_1.innerHTML = disp;
@@ -139,17 +141,18 @@ function btn_call(e) {
         temp = [...memory];
         t_flag = 1;
 
-        for (j = 0; j <= last+1; j++) {
+        for (j = 0; j <= last; j++) {
             if (memory.length == 1) {
                 break;
             }
-            else if (memory[j] == '%' && j != memory.length - 1) {
+            else if (memory[j] == '%') {
+                console.log("j", j ," ", memory[j]);
                 num = parseFloat(memory[j - 1]) / 100;
                 memory.splice(j - 1, 2, num);
-                console.log("parcent:", num);
                 j = 0;
             }
         }
+        console.log("parcent:", num);
         for (j = 0; j <= last; j++) {
             if (memory.length == 1) {
                 break;
