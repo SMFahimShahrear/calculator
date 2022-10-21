@@ -17,7 +17,8 @@
     background: #FCFCFC;
     border: 1px solid #CECECE;
     border-radius: 10px;
-    width: 600px;
+    width: 30%;
+    min-width: 400px;
     margin: auto;
     padding: 60px 30px;
 }
