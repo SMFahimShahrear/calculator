@@ -12,6 +12,7 @@ let t_flag = 0;
 let op_flag = 0;
 let dot_flag = 0;
 let d_flag = 0;
+let parcent_flag = 0;
 let memory = [];
 let temp;
 let i = 0;
@@ -71,6 +72,12 @@ function btn_call(e) {
             dot_flag = 0;
             console.log(op_flag);
         }
+        else if (e == "="){
+            console.log("ok");
+            t_disp = disp.slice(0, -1);
+            disp = t_disp;
+            screen_1.innerHTML = disp;
+        }
         else if(e == "." && dot_flag == 0){
             console.log("dot");
             dot_flag = 1;
@@ -88,6 +95,7 @@ function btn_call(e) {
             d_flag = 2;
             op_flag = 0;
         }
+        
         if (e == "Del") {
             console.log(init);
             if(disp[disp.length-2] == "."){
