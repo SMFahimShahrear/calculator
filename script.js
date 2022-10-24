@@ -10,6 +10,7 @@ let strng = '';
 let last = 0;
 let t_flag = 0;
 let op_flag = 0;
+let first_flag = 0;
 let dot_flag = 0;
 let d_flag = 0;
 let parcent_flag = 0;
@@ -36,6 +37,7 @@ function btn_call(e) {
         num = '';
         last = 0;
         t_flag = 0;
+        first_flag = 0;
         memory = [];
         memory[0] = 0;
         i = 0;
@@ -50,41 +52,45 @@ function btn_call(e) {
             }
         }
 
-        if (e == "+" || e == "-" || e == "x" || e == "/" ||  e == "%") {
-            if(op_flag == 1){
-                i--;
-                memory[i] = e;
-                t_disp = disp.slice(0, -2);
-                disp = t_disp;
-                disp += e;
-                screen_1.innerHTML = disp;
-                console.log(memory);
-                console.log(temp);
-                console.log(init);
-                console.log(disp);
+        if (e == "+" || e == "-" || e == "x" || e == "/" || e == "%") {
+            if (first_flag == 1) {
+                if (op_flag == 1) {
+                    i--;
+                    memory[i] = e;
+                    t_disp = disp.slice(0, -2);
+                    disp = t_disp;
+                    disp += e;
+                    screen_1.innerHTML = disp;
+                }
+                else {
+                    i++;
+                    memory[i] = e;
+                }
+                i++;
+                init = '';
+                last = memory.length - 1;
+                d_flag = 1;
+                dot_flag = 0;
+                op_flag = 1;
+                first_flag = 1;
             }
-            else{
-             i++;
-            memory[i] = e;
-             }
-            i++;   
-            init = '';
-            last = memory.length - 1;
-            d_flag = 1;
-            dot_flag = 0;
-            op_flag = 1;
+            else {
+                init = '';
+                disp = '0';
+                screen_1.innerHTML = disp;
+                t_disp = disp.slice(0, -1);
+                disp = t_disp;
+            }
         }
-        else if (e == "="){
+        else if (e == "=") {
             t_disp = disp.slice(0, -1);
             disp = t_disp;
-            t_init = init.slice(0, -1);
-            init = t_init;
             screen_1.innerHTML = disp;
         }
-        else if(e == "." && dot_flag == 0){
+        else if (e == "." && dot_flag == 0) {
             dot_flag = 1;
         }
-        else if(e == "." && dot_flag == 1){
+        else if (e == "." && dot_flag == 1) {
             t_disp = disp.slice(0, -1);
             disp = t_disp;
             t_init = init.slice(0, -1);
@@ -96,28 +102,33 @@ function btn_call(e) {
             memory[i] = parseFloat(init);
             d_flag = 2;
             op_flag = 0;
+            first_flag = 1;
         }
-        
+
         if (e == "Del") {
-            if(disp[disp.length-2] == "."){
+            if (disp[disp.length - 2] == ".") {
                 t_disp = disp.slice(0, -2);
-                t_init = init.slice(0, -2);
-                init = t_init;
+                t_init = (init.toString()).slice(0, -2);
+                init = parseFloat(t_init);
                 dot_flag = 0;
+                op_flag = 0;
             }
-            // else if(isNaN(disp[disp.length-2])){
-                
-            // }
-            else{
+            else if (isNaN(disp[disp.length - 2])) {
                 t_disp = disp.slice(0, -1);
-                t_init = init.slice(0, -1);
+                op_flag = 1;
+            }
+            else {
+                t_disp = disp.slice(0, -1);
+                t_init = (init.toString()).slice(0, -1);
                 init = t_init;
+                op_flag = 0;
             }
             disp = t_disp;
             screen_1.innerHTML = disp;
             if (d_flag == 1) {
                 memory.splice(memory.length - 1, 1);
-                i-=2;
+                i -= 2;
+                init = memory[i];
                 d_flag = 2;
             }
             else if (d_flag == 2 && Number.isInteger(memory[memory.length - 1]) == true) {
@@ -126,7 +137,6 @@ function btn_call(e) {
                     memory.splice(memory.length - 1, 1);
                     d_flag = 1;
                     init = '';
-                    console.log("called");
                 }
                 else if (x == 0 && memory.length == 1) {
                     i = 0;
@@ -134,19 +144,18 @@ function btn_call(e) {
                     temp[0] = 0;
                     screen_1.innerText = 0;
                     init = '';
+                    first_flag = 0;
                 }
                 else {
                     memory[memory.length - 1] = x;
-                    t_init = init.slice(0, -1);
-                    init = t_init;
+                    init = x;
                     d_flag = 2;
                 }
             }
-            else if(d_flag == 2 && Number.isInteger(memory[memory.length - 1]) == false){
-                strng = (memory[memory.length - 1].toString()).slice(0,-1);
+            else if (d_flag == 2 && Number.isInteger(memory[memory.length - 1]) == false) {
+                strng = (memory[memory.length - 1].toString()).slice(0, -1);
                 memory[memory.length - 1] = parseFloat(strng);
             }
-
         }
         temp = [...memory];
         t_flag = 1;
@@ -203,8 +212,12 @@ function btn_call(e) {
 
         }
     }
-    console.log(init);
-    screen_2.innerHTML = parseFloat(memory[0]);
+    if(memory[0] == undefined){
+        screen_2.innerHTML = 0;
+    }
+    else{
+        screen_2.innerHTML = parseFloat(memory[0]);
+    }
 
 }
 
